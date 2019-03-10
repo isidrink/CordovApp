@@ -55,6 +55,7 @@ var app = {
         
         if (app.isCordova) {
             document.addEventListener('deviceready', function() {
+                this.onDeviceReady.bind(this);
                 if (navigator && navigator.splashscreen) {
                     navigator.splashscreen.hide();
                 }
