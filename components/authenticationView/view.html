@@ -1,8 +1,10 @@
 <div data-role="view" data-title="Authentication" data-layout="main-nonav" data-model="app.authenticationView" data-show="app.authenticationView.onShow" data-after-show="app.authenticationView.afterShow" class="authentication-view">
     <div class="signin-view">
-        <h1>friends</h1>
+        <!-- *class logo / logo company or app -->
+        <div class="logo">
+                <img src="styles/logo.png" alt="Company">
+        </div>
         <form id="login-form" class="form">
-            <h2>Login</h2>
             <ul data-role="listview">
                 <li>
                     <input name="username" type="text" placeholder="Username" data-bind="value: authenticationViewModel.user.username" required autofocus>
@@ -14,34 +16,10 @@
             <a data-role="button" class="primary" data-bind="events: { click: authenticationViewModel.signin }">Login</a>
         </form>
 
-        <a data-role="button" class="text-only" data-bind="events: { click: authenticationViewModel.toggleView }">Sign Up</a>
-
+				<span class="separator">-or-</span>
         <div class="social-login">
-            <button class="button-social button-facebook" data-role="button" data-bind="events: { click: authenticationViewModel.facebookLogin }"></button>
-            <button class="button-social button-adsf" id="adfs-btn" data-role="button" data-bind="events: { click: authenticationViewModel.adfsLogin }"></button>
+            <div id="firebaseui-container"></div>
         </div>
-    </div>
-    <div class="signup-view" style="display:none;">
-        <h1>friends</h1>
-        <form id="authentication-form" class="form">
-            <h2>Create New Account</h2>
-            <ul data-role="listview">
-                <li>
-                    <input name="username" type="text" placeholder="Username" data-bind="value: authenticationViewModel.user.username" required>
-                </li>
-                <li>
-                    <input name="password" type="password" placeholder="Password" data-bind="value: authenticationViewModel.user.password" required>
-                </li>
-                <li>
-                    <input name="email" type="email" placeholder="Email" data-bind="value: authenticationViewModel.user.email">
-                </li>
-                <li>
-                    <input name="name" type="text" placeholder="Display Name" data-bind="value: authenticationViewModel.user.displayName">
-                </li>
-            </ul>
-            <a class="primary" data-role="button"data-bind="events: { click: authenticationViewModel.register }">Sign Up</a>
-        </form>
-        <a class="button-icon button-back top-left" data-role="button" data-bind="events: { click: authenticationViewModel.toggleView }"></a>
     </div>
 
     <div class="offline" align="center" style="display:none;">

@@ -30,6 +30,26 @@
     <script src="components/activitiesView/index.js"></script>
     <script src="components/profileView/index.js"></script>
     <script src="components/commentsView/index.js"></script>
+    
+    
+    <script src="https://www.gstatic.com/firebasejs/4.8.1/firebase.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.8.1/firebase-messaging.js"></script>
+    <script src="https://cdn.firebase.com/libs/firebaseui/2.3.0/firebaseui.js"></script>
+    <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/2.3.0/firebaseui.css" />
+    
+    <script>
+        
+    // Initialize Firebase
+    var config = {
+    apiKey: "AIzaSyAmwgrLF27JtLGWKrNwk-IkYEq7WI837SI",
+    authDomain: "appear-2b0a8.firebaseapp.com",
+    databaseURL: "https://appear-2b0a8.firebaseio.com",
+    projectId: "appear-2b0a8",
+    storageBucket: "",
+    messagingSenderId: "990230730445"
+    };
+    firebase.initializeApp(config);
+    </script>
 </head>
 <body id="friendsApp">
     <div data-role="layout" data-id="main">

@@ -1,18 +1,75 @@
 'use strict';
 
 (function () {
+    /**
+    * @return {!Object} The FirebaseUI config.
+    */
+   function getUiConfig() {
+     return {
+       'callbacks': {
+         // Called when the user has been successfully signed in.
+         'signInSuccess': function(user, credential, redirectUrl) {
+           handleSignedInUser(user);
+           // Do not redirect.
+           return false;
+         }
+       },
+       // Opens IDP Providers sign-in flow in a popup.
+       'signInFlow': 'popup',
+       'signInOptions': [
+           // The Provider you need for your app. We need the Phone Auth
+           //firebase.auth.GoogleAuthProvider.PROVIDER_ID,
+           firebase.auth.FacebookAuthProvider.PROVIDER_ID,
+           //firebase.auth.TwitterAuthProvider.PROVIDER_ID,
+           //firebase.auth.GithubAuthProvider.PROVIDER_ID,
+           firebase.auth.EmailAuthProvider.PROVIDER_ID,
+           {
+             provider: firebase.auth.PhoneAuthProvider.PROVIDER_ID,
+             recaptchaParameters: {
+               //size: getRecaptchaMode()
+               type: 'image',
+               size: 'invisible',
+               badge: 'bottomleft'
+             }
+         }
+       ],
+       // Terms of service url.
+       'tosUrl': 'https://www.google.com'
+     };
+   }
+   /**
+    * Displays the UI for a signed in user.
+    * @param {!firebase.User} user
+    */
+   var handleSignedInUser = function(user) {
+     /*document.getElementById('user-signed-in').style.display = 'block';
+     document.getElementById('user-signed-out').style.display = 'none';
+     document.getElementById('name').textContent = user.displayName;
+     document.getElementById('email').textContent = user.email;
+     document.getElementById('phone').textContent = user.phoneNumber;
+     if (user.photoURL){
+       document.getElementById('photo').src = user.photoURL;
+       document.getElementById('photo').style.display = 'block';
+     } else {
+       document.getElementById('photo').style.display = 'none';
+     }*/
+     
+        console.log("update displayname");
+        console.log(user);
+        app.writeUserData(user.uid, user.displayName, user.email, user.photoURL);
+        app.mobileApp.navigate('components/profileView/view.html');
+   };
+   
     var view = app.authenticationView = kendo.observable({
         onShow: function () {
-            var shouldDisableAdfsButton = app.settings.adfs.endpoint === '$ADFS_ENDPOINT$' && app.settings.adfs.realm === '$ADFS_REALM$';
-            if (shouldDisableAdfsButton) {
-                $('#adfs-btn').prop('disabled', shouldDisableAdfsButton);
-            }
-
             mode = app.constants.authenticationModeSignin; //reset the view mode
             init();
         },
         afterShow: function () {
-            provider.users.currentUser().then(successHandler, init)
+            
+            var ui = new firebaseui.auth.AuthUI(firebase.auth());
+            //provider.users.currentUser().then(successHandler, init)
+            ui.start('#firebaseui-container', getUiConfig());
         }
     });
 
@@ -29,12 +86,8 @@
         }
 
         var activeView = mode === app.constants.authenticationModeSignin ? '.signin-view' : '.signup-view';
-
-        if (provider.setup && provider.setup.offlineStorage && !app.data.defaultProvider.isOnline()) {
-            $('.offline').show().siblings().hide();
-        } else {
+        
             $(activeView).show().siblings().hide();
-        }
     }
 
     function successHandler(data) {
@@ -44,7 +97,10 @@
             app.data.defaultProvider.users.currentUser()
                 .then(function (res) {
                     app.user = res.result;
-                    app.mobileApp.navigate('components/' + redirect + '/view.html');
+                    //app.mobileApp.navigate('components/' + redirect + '/view.html');
+                     //app.navigation.navigateMap();
+
+                    app.drawerModel.set("isAnomymous", false);
                     app.utils.loading(false);
                 });
         } else {
@@ -61,10 +117,10 @@
         },
         loginValidator: null,
         registerValidator: null,
-        signin: function (username, password) {
+        signin: function (email, password) {
             var model = vm.user;
-            if (typeof username !== 'string') {
-                username = model.username;
+            if (typeof email !== 'string') {
+                email = model.username;
             }
 
             if (typeof password !== 'string') {
@@ -77,144 +133,26 @@
             }
 
             app.utils.loading(true);
-            provider.users.login(username, password, function (data) {
-                vm.set('user.username', '');
-                vm.set('user.password', '');
-
-                successHandler(data);
-            }, init);
-        },
-        register: function () {
-            this.registerValidator = app.validate.getValidator('#authentication-form');
-            if (!this.registerValidator.validate()) {
-                return;
-            }
-
-            var model = vm.user;
-            var username = model.username;
-            var password = model.password;
-            var displayName = model.displayName;
-            var email = model.email;
-
-            var attrs = {
-                DisplayName: displayName,
-                Email: email
-            };
-
-            app.utils.loading(true);
-            provider.users.register(username, password, attrs, function () {
-                vm.set('user.displayName', '');
+            firebase.auth().signInWithEmailAndPassword(email, password).then(function() {
+                // Sign-in successful.
                 vm.set('user.email', '');
-
-                app.notify.success('Registration successful');
-                vm.signin(username, password);
-            }, init);
-        },
-        toggleView: function () {
-            mode = mode === app.constants.authenticationModeSignin ?
-                app.constants.authenticationModeRegister : app.constants.authenticationModeSignin;
-            vm.set('user.username', '');
-            vm.set('user.password', '');
-            vm.set('user.displayName', '');
-            vm.set('user.email', '');
-            if (this.loginValidator) {
-                this.loginValidator.hideMessages();
-            }
-
-            if (this.registerValidator) {
-                this.registerValidator.hideMessages();
-            }
-
-            init();
-        },
-        facebookLogin: function () {
-            if (app.utils.isInSimulator() || !app.isCordova) {
-                return app.notify.info('Facebook login is only available on a device.');
-            }
-
-            var fbLogin = function (response) {
-                provider.authentication.loginWithFacebook(response.authResponse.accessToken)
-                    .then(successHandler, init);
-            };
-
-            facebookConnectPlugin.getLoginStatus(function(response) {
-                if (response.status === 'connected') {
-                    fbLogin(response);
+                vm.set('user.password', '');
+                //alert(email);
+                //successHandler(data);
+                //app.writeUserData(app.user.uid, app.user.displayName, app.user.email, app.user.photoURL);
+                app.mobileApp.navigate('components/profileView/view.html');
+                app.utils.loading(false);                    
+              }).catch(function(error) {
+                // Handle Errors here.
+                var errorCode = error.code;
+                var errorMessage = error.message;
+                // ...
+                if (errorCode === 'auth/wrong-password') {
+                    alert('Wrong password.');
                 } else {
-                    facebookConnectPlugin.login(['email'],
-                        function(response) {
-                            if (response.status === 'connected') {
-                                fbLogin(response);
-                            } else {
-                                app.notify.success('You are not logged in');
-                            }
-                        }, function (err) {
-                            var message = (err && err.message) || err;
-                            if (message === 'User Cancelled dialog') {
-                                return;
-                            }
-
-                            app.notify.error(err);
-                        });
+                    alert(errorMessage);
                 }
-            });
-        },
-        adfsLogin: function (e) {
-            if (e.target.prop('disabled')) {
-                return;
-            }
-
-            var getParameterByName = function (name, url) {
-                name = name.replace(/[\[]/, '\\\[').replace(/[\]]/, '\\\]');
-                var regexS = name + '=([^&#]*)';
-
-                var regex = new RegExp(regexS);
-                var results = regex.exec(url);
-
-                if (results === null) {
-                    return false;
-                } else {
-                    return decodeURIComponent(results[1].replace(/\+/g, ' '));
-                }
-            };
-
-            var onLocationChanged = function(loc, callback) {
-                if (loc.indexOf('access_token=') !== -1) {
-                    ref.close();
-                    var token = getParameterByName('access_token', loc);
-                    callback(token);
-                }
-            };
-
-            var onResponse = function (accessToken) {
-                provider.authentication.loginWithADFS(accessToken, successHandler, init);
-            };
-
-            var adfsConfig = {
-                name: 'ADFS',
-                loginMethodName: 'loginWithADFS',
-                endpoint: app.settings.adfs.endpoint,
-                wa: 'wsignin1.0',
-                wtrealm: app.settings.adfs.realm
-            };
-
-            var authorize_url = adfsConfig.endpoint
-                + '?wa=' + adfsConfig.wa
-                + '&wreply=' + adfsConfig.wtrealm + '/adfs/token'
-                + '&wtrealm=' + adfsConfig.wtrealm;
-
-            var ref = window.open(authorize_url, '_blank', 'location=no');
-
-            ref.addEventListener('loadstop', function(event) {
-                onLocationChanged(event.url, onResponse);
-            });
-
-            ref.addEventListener('loaderror', function(event) {
-                app.notify.error('Load error: ' + event.message);
-            });
-
-            ref.addEventListener('loadstart', function(event) {
-                onLocationChanged(event.url, onResponse);
+                init(error);
             });
         }
     });

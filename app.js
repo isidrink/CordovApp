@@ -4,6 +4,27 @@
     var bootstrap = function () {
         $(function () {
             app.mobileApp = new kendo.mobile.Application(document.body, {
+                skin: 'nova',
+                initial: 'components/emptyView/view.html',
+                init: function () {
+                    console.log("init App");
+                    firebase.auth().onAuthStateChanged(function(user) {
+                        console.log(user);
+                        if (user) {
+                            // User is signed in.
+                            app.user = user;                                                              
+                            //app.navigation.navigateUsers();
+                            app.mobileApp.navigate('components/profileView/view.html');
+                            //app.mobileApp.navigate('components/contactsView/view.html');
+                            
+                        } else {
+                          // No user is signed in.
+                            app.mobileApp.navigate('components/authenticationView/view.html');
+                        }
+                    });
+                }
+            });
+            /*app.mobileApp = new kendo.mobile.Application(document.body, {
                 skin: 'flat',
                 initial: 'components/emptyView/view.html',
                 init: function () {
@@ -26,7 +47,7 @@
                             });
                     }
                 }
-            });
+            });*/
         });
     };
 
