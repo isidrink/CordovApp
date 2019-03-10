@@ -1,0 +1,24 @@
+{
+  "name": "friends-hybrid",
+  "authors": [],
+  "description": "",
+  "main": "",
+  "moduleType": [],
+  "license": "MIT",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "everlive": "1.6.10",
+    "lodash": "~4.5.1",
+    "noty": "~2.3.8"
+  },
+  "resolutions": {
+    "everlive": "1.6.10"
+  }
+}

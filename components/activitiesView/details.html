@@ -1,0 +1,28 @@
+<div id="activities-details-view" data-layout="main-nonav" data-role="view" data-title="Details" data-model="app.activitiesView.activityDetailsViewModel" data-bind="events: { show: onShow }" id="activitiesViewModelDetailsView" class="activity-details-view">
+    <div class="content">
+        <div class="content-picture">
+            <img id="current-activity-photo" data-bind="attr: { data-src: currentActivity.PictureUrl }" data-responsive height="300">
+        </div>
+        <div class="content-header">
+            <div class="author-avatar large">
+                <img data-responsive id="current-activity-author-photo" data-bind="attr: { data-src: currentActivity.User.PictureUrl }" width="80" height="80">
+            </div>
+            <div class="content-date" data-bind="text: currentActivity.CreatedAt"></div>
+        </div>
+        <p class="content-text" data-bind="text: currentActivity.Text"></p>
+        <div class="content-footer">
+            <a class="button-icon button-remove" id="remove" data-role="button" data-bind="events: { click: removeActivity }, visible: canDelete"></a>
+            <button role="button" data-bind="events: {click: likeActivity}" class="likes">
+                <span id="likes-icon" class="likes-icon icon"></span>
+                <span id="count-icon" class="count" data-bind="text: currentActivity.Likes.length"></span>
+            </button>
+            <button role="button" data-bind="events: {click: openComments }" class="comments">
+                <span id="comments-icon" class="icon"></span>
+                <span id="comments-count"></span>
+            </button>
+            <span id="likes-template-content"></span>
+        </div>
+    </div>
+    <a class="button-icon button-back-shadow top-left" data-role="button" data-bind="events: { click: goBack }"></a>
+    <a class="button-icon button-edit-shadow top-right" id="edit" data-role="button" data-bind="events: { click: editActivity }, visible: canEdit"></a>
+</div>
