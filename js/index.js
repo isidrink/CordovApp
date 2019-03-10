@@ -16,10 +16,68 @@
  * specific language governing permissions and limitations
  * under the License.
  */
+var bootstrap = function () {
+    $(function () {
+        
+        /*app.mobileApp = new kendo.mobile.Application(document.body, {
+            skin: 'flat',
+            initial: 'components/emptyView/view.html',
+            init: function () {
+                app.data.defaultProvider.users.currentUser()
+                    .then(function (res) {
+                        if (res.result) {
+                            app.user = res.result;
+                            //we are logged in
+                            app.navigation.navigateActivities();
+                        } else {
+                            throw new Error('not authenticated');
+                        }
+                    })
+                    .catch(function () {
+                        //we are not logged in
+                        app.navigation.navigateAuthentication();
+                    });
+            }
+        });*/
+        console.log("bootstrap");
+    });
+};
+
 var app = {
     // Application Constructor
     initialize: function() {
-        document.addEventListener('deviceready', this.onDeviceReady.bind(this), false);
+        console.log(app.isCordova);
+        /*if(app.isCordova){
+            document.addEventListener('deviceready', this.onDeviceReady.bind(this), false);
+        }else{
+            bootstrap();
+        }*/
+        
+        if (app.isCordova) {
+            document.addEventListener('deviceready', function() {
+                if (navigator && navigator.splashscreen) {
+                    navigator.splashscreen.hide();
+                }
+
+                var element = document.getElementById('appDrawer');
+                if (typeof(element) != 'undefined' && element !== null) {
+                    if (window.navigator.msPointerEnabled) {
+                        $('#navigation-container').on('MSPointerDown', 'a', function() {
+                            app.keepActiveState($(this));
+                        });
+                    } else {
+                        $('#navigation-container').on('touchstart', 'a', function() {
+                            app.keepActiveState($(this));
+                        });
+                    }
+                }
+
+                bootstrap();
+            }, false);
+        } else {
+            bootstrap();
+        }
+
     },
 
     // deviceready Event Handler
@@ -41,6 +99,13 @@ var app = {
 
         console.log('Received Event: ' + id);
     }
+};
+app.isCordova = !!window.cordova;
+
+app.keepActiveState = function _keepActiveState(item) {
+    var currentItem = item;
+    $('#navigation-container li a.active').removeClass('active');
+    currentItem.addClass('active');
 };
 
 app.initialize();
