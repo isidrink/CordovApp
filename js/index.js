@@ -54,7 +54,8 @@ var app = {
         }*/
         
         if (app.isCordova) {
-            document.addEventListener('deviceready', function() {
+            document.addEventListener('deviceready', this.onDeviceReady.bind(this), false);
+            /*document.addEventListener('deviceready', function() {
                 this.onDeviceReady.bind(this);
                 if (navigator && navigator.splashscreen) {
                     navigator.splashscreen.hide();
@@ -74,7 +75,7 @@ var app = {
                 }
 
                 bootstrap();
-            }, false);
+            }, false);*/
         } else {
             bootstrap();
         }
