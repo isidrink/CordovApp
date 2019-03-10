@@ -1,0 +1,54 @@
+{
+  "_app": {
+    "navigationMore": "More ES",
+    "showMoreTitle": "Show More ES",
+    "qrCodeScan": "Scan ES"
+  },  
+  "drawer": {
+      "title": "Menu",
+      "menu1": "Actividades",
+      "menu2": "Localización",
+      "menu3": "Perfil",
+      "menu4": "Salir",
+    "language": "Idioma"
+  },
+  "homeView": {
+    "title": "Información",
+    "login": "Login / Registrarse",
+    "logout": "Salir"
+  },
+  "settingsView": {
+    "title": "Settings ES"
+  },
+  "contactsView": {
+    "title": "Jugadores",
+    "tab1title": "Personajes",
+    "tab2title": "ChatGroup",
+    "tab3title": "Nominación",
+    "tab4title": "Retos"
+  },
+  "profileView": {
+    "title": "Perfil",
+    "progress1": "Perfil cuenta",
+    "progress2": "Partidas",
+    "progress3": "Perfil partida", 
+    "resume1": "Jugadas",
+    "resume2": "Posición",
+    "resume3": "Ganadas",
+    "label1": "Nombre a mostrar",
+    "label2": "Edad",
+    "label3": "Ciudad",
+    "label4": "Idiomas",
+    "resume1": "Victorias",
+    "resume2": "Jugadas",
+    "resume3": "Posición",
+    "label5": "Información Grupos",
+    "label6": "Opciones Juego",
+    "label7": "Nivel",
+    "label8": "Resultados Juegos",
+    "label9": "Nombre del Juego",
+    "label10": "# de jugadores",
+    "next": "Siguiente",
+    "previous": "Anterior"
+  }
+}

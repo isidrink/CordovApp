@@ -1,0 +1,54 @@
+{
+  "_app": {
+    "navigationMore": "More",
+    "showMoreTitle": "Show More",
+    "qrCodeScan": "Scan"
+  },  
+  "drawer": {
+      "title": "Navigation",
+      "menu1": "Activities",
+      "menu2": "Localizations",
+      "menu3": "Profile",
+      "menu4": "Logout",
+    "language": "Language"
+  },
+  "homeView": {
+    "title": "Information",
+    "login": "Login / Sign Up",
+    "logout": "Logout"
+  },
+  "settingsView": {
+    "title": "Settings"
+  },
+  "contactsView": {
+    "title": "Players",
+    "tab1title": "Characters",
+    "tab2title": "ChatGroup",
+    "tab3title": "Nomination",
+    "tab4title": "Challenges"
+  },
+  "profileView": {
+    "title": "Profile",
+    "progress1": "Account Profile",
+    "progress2": "Games",
+    "progress3": "Game Profile",
+    "resume1": "Played",
+    "resume2": "Position",
+    "resume3": "Wins", 
+    "label1": "Display Name",
+    "label2": "Age",
+    "label3": "City",
+    "label4": "Languages",
+    "resume1": "Wins",
+    "resume2": "Played",
+    "resume3": "Position",
+    "label5": "Info Groups",
+    "label6": "Games choices",
+    "label7": "Level",
+    "label8": "Games Results",
+    "label9": "Game name",
+    "label10": "Players #",
+    "next": "Next",
+    "previous": "Previous"
+  }
+}

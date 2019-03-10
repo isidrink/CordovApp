@@ -1,0 +1,55 @@
+{
+  "_app": {
+    "navigationMore": "More CA",
+    "showMoreTitle": "Show More CA",
+    "qrCodeScan": "Scan CA"
+  },  
+  "drawer": {
+      "title": "Menú",
+      "menu1": "Activitats",
+      "menu2": "Localitzacions",
+      "menu3": "Perfil",
+      "menu4": "Sortir",
+    "language": "Idioma"
+  },
+  "homeView": {
+    "title": "Informació",
+    "login": "Login / Registrar-se",
+    "logout": "Sortir"
+  },
+  "settingsView": {
+    "title": "Settings CA"
+  },
+  "contactsView": {
+    "title": "Jugadors",
+    "tab1title": "Personatges",
+    "tab2title": "ChatGroup",
+    "tab3title": "Nominació",
+    "tab4title": "Reptes"
+  },
+  "profileView": {
+    "title": "Perfil",
+    "progress1": "Perfil compte",
+    "progress2": "Partides",
+    "progress3": "Perfil partida", 
+    "resume1": "Jugat",
+    "resume2": "Posició",
+    "resume3": "Guanyat",
+    "label1": "Nom a mostrar",
+    "label2": "Edat",
+    "label3": "Ciutat",
+    "label4": "Idiomes",
+    "resume1": "Victories",
+    "resume2": "Jugades",
+    "resume3": "Posició",
+    "label5": "Informació Grups",
+    "label6": "Opcions Joc",
+    "label7": "Nivell",
+    "label8": "Resultats Jocs",
+    "label9": "Nom del Joc",
+    "label10": "# de jugadors",
+    "next": "Següent",
+    "previous": "Anterior"
+        
+  }
+}
