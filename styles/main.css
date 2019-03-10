@@ -421,7 +421,7 @@ textarea:-ms-input-placeholder {
 #friendsApp .activities-view .km-listview li:not(.km-load-more),
 #friendsApp .comments-view .km-listview li:not(.km-load-more),
 #friendsApp .profile-view .km-listview li:not(.km-load-more):not(.content-picture) {
-    padding: 1em 2em;
+    /*padding: 1em 2em;*/
 }
 
 #friendsApp .profile-view .km-listview {
@@ -433,7 +433,7 @@ textarea:-ms-input-placeholder {
 }
 
 #friendsApp .profile-view input {
-    
+    text-align: center;
 }
 
 #friendsApp .activity-details-view .content {
