@@ -52,6 +52,33 @@
         currentItem.addClass('active');
     };
 
+     app.writeUserData = function (userId, name, email, imageUrl) {
+        firebase.database().ref('users/' + userId).set({
+            username: name,
+            email: email,
+            age: 18,
+            city: 'Barcelona',
+            resume : {wins : "0", played : "0", position : "0" },
+            profile_picture : imageUrl == null ? app.constants.defaultPicture : imageUrl
+        });
+        /*firebase.database().ref('users/' + userId).ref().set(
+            { company : {name : "Telerik"}, message: "Hello World" },
+            function(msg) {console.log('Message written, error: ' + msg)}
+        );*/
+        console.log(userId, name, email, imageUrl);
+    };
+
+    app.writeUserData2 = function (userId, profile) {
+        console.log(userId);
+        firebase.database().ref('users/' + userId).update({
+            username: profile.DisplayName,
+            age: profile.Age,
+            profile_picture : profile.PictureUrl == null ? app.constants.defaultPicture : profile.PictureUrl,
+            //profile_picture: 'http://vignette.wikia.nocookie.net/es.starwars/images/d/d6/Yoda_SWSB.png',
+            city: 'Barcelona'
+        });
+    };
+    
     app.fetchUser = function (userId) {
         return firebase.database().ref('users/' + userId)
         .once('value')
