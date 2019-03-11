@@ -1,0 +1,458 @@
+<style>
+    .item2 img{
+        border: 1px solid #FF9293;
+        max-width: 50px;
+        max-height: 50px;
+        padding: 2px;
+        top: 12px;
+    }
+    .job-title{font-size: .7em;}
+    /*.btn-archive{font-size: 30px; margin-top: 0px !important;}*/
+    a:nth-child(1).btn-archive i{font-size: 30px;/*color: green*/}
+    a:nth-child(2).btn-archive i{font-size: 30px;/*color: red*/}
+    /****************************************************/
+    .km-flat,
+    .km-flat .km-navbar,
+    .km-flat .km-content,
+    .km-flat .km-group-title,
+    .km-flat .km-listview-link {
+      font-family: "Open Sans", sans-serif;
+    }
+
+    .block {
+      border-radius: 4px;
+      margin: 10px;
+      padding: 2px;
+    }
+
+    .block.info {
+      color: #50607f;
+      border-color: #d0d9df;
+      background-color: #f0f9ff;
+    }
+
+    .block.error {
+      color: #7f5050;
+      border-color: #dfd0d0;
+      background-color: #fff0f0;
+    }
+
+    .km-drawer-button:before,
+    .km-drawer-button:after {
+      content: "\E077";
+    }
+
+    .k-widget.k-tooltip-validation {
+      color: #7f5050;
+      border-color: transparent;
+      background-color: #fff0f0;
+      text-align: left;
+      border-radius: none;
+    }
+
+    .k-tooltip {
+      -webkit-box-shadow: none;
+      box-shadow: none;
+    }
+
+    .telerik-container {
+      height: 200px;
+      margin-top: 15px;
+      margin-right: auto;
+      margin-left: auto;
+      width: 200px;
+    }
+
+    .center-text {
+      text-align: center;
+    }
+
+    .center-block {
+      display: block;
+      margin-right: auto;
+      margin-left: auto;
+      text-align: center;
+    }
+
+    #username,
+    #password {
+      position: relative;
+      width: 100%;
+    }
+
+    #username:before,
+    #password:before {
+      position: absolute;
+      top: 50%;
+      right: .75em;
+      display: block;
+      margin-top: -.5em;
+      width: 1em;
+      height: 1em;
+      background-color: transparent;
+      background-position: 0 0;
+      background-repeat: no-repeat;
+      content: '';
+    }
+
+    #chatLog {
+      padding: 10px;
+    }
+
+    #chatLog > li:first-child {
+      padding: 0px 0px 3px 0px;
+    }
+
+    #chatLog > li {
+      background-color: transparent;
+      border-style: none;
+      padding: 3px 0px 3px 0px;
+    }
+
+    #contactsListView > li > div > div {
+      color: #AAA;
+      font-size: 0.6em;
+    }
+
+    .message-footer {
+      background-color: #eee;
+      display: table;
+      width: 100%;
+    }
+
+    .messageTextBoxContainer {
+      display: table-cell;
+      margin: 0;
+      vertical-align: middle;
+      width: 100%;
+    }
+    #messageTextBox2, #messageTextBox{width: 100%; height: 40px;  border: none}
+
+    .message {
+      -webkit-border-radius: 2px;
+      -moz-border-radius: 2px;
+      border-radius: 2px;
+      border-width: 0;
+      display: table-cell;
+      height: 100%;
+      padding: 5px;
+      width: 100%;
+    }
+
+    .message-button-container {
+      vertical-align: middle;
+    }
+
+    .message-button {
+      background-color: transparent;
+      border-color: transparent;
+      display: table-cell;
+      padding: 5px 0px 5px 0px;
+      /*margin: 0px 5px 0px 5px;*/
+      vertical-align: middle;
+    }
+    .message-button span{
+        font-size:20px;
+    }
+
+    .bubble-contact {
+      color: #4C5356;
+      margin-left: 40px;
+    }
+
+    .listview-photo {
+      float: left;
+      height: 41px;
+      width: 45px;
+    }
+
+    .chat-display-name {
+      color: #10C4B2;
+      font-size: 0.7em;
+      font-weight: bold;
+      margin-left: 45px;
+    }
+
+    #chatUserRoomList .bubble-from {
+      -webkit-border-radius: 2px;
+      -moz-border-radius: 2px;
+      border-radius: 2px;
+      color: white;
+      position: relative;
+      padding: 10px;
+      margin-left: 0;
+      background: #10C4B2;
+    }
+    
+    .bubble-from {
+      -webkit-border-radius: 2px;
+      -moz-border-radius: 2px;
+      border-radius: 2px;
+      color: white;
+      position: relative;
+      padding: 10px;
+      margin-left: 45px;
+      background: #10C4B2;
+    }
+
+    .bubble-from:after  {
+      border-color: transparent #10C4B2;
+      border-style: solid;
+      border-width: 7px 7px 7px 0;
+      content: '';
+      display: block;
+      left: -6px;
+      position: absolute;
+      top: 10px;
+      width: 0;
+      z-index: 1;
+    }
+
+    .iconBox {
+      color: #10C4B2;
+      display: flex;
+      font-size: 32px;
+      float: left;
+    }
+
+    .bubble-to {
+      /*padding-bottom: 10px;
+      padding-top: 10px;
+      position: relative;*/
+      text-align: right;
+    }
+
+    .km-list > .active:before {
+      border-color: transparent #10C4B2;
+      border-style: solid;
+      border-width: 3px;
+      background-color: #10C4B2;
+      content: '';
+      height: 100%;
+      left: 0;
+      position: absolute;
+      top: 0;
+    }
+
+    .action {
+      position: absolute;
+      /*left: 0;*/
+      right: 0;
+      top: 0;
+      bottom: 0;
+      margin: 0;
+      width: 100%;
+      height: 100%;
+      background-color: #F1F1F1;
+      text-align: center;
+    }
+    #msform2, #msform3{display: inherit}
+    #chatGroup{/*padding-bottom: 0px;*/}
+    .bubble-to img{float:right !important}
+    .chat-message-photo{
+        width: auto;
+        height: 60px;
+    }
+    .chat-display-name .time{float:right}
+    #chatGroup li{padding: 0 10px 10px 10px; /*border:none;*/border: 2px #4C5356 dashed}
+    .km-badge {
+    top: 1em;
+    }
+    /*******************************************/
+body {
+    margin: 2em; 
+    font-family: Arial, Helvetica, sans-serif;
+    background: #333;
+}
+
+.group {
+    border: 2px solid #121212;
+    height: 36px;
+    width: 164px;
+    border-radius: 5px;
+    background: #222;
+    background-clip: border-box;
+}
+
+input[type="radio"], 
+input[type="checkbox"] {
+    /* hide the inputs */
+    opacity: 0;
+    display: none;
+    margin: 0;
+}
+
+/* style your lables/button */
+input[type="radio"] + label, 
+input[type="checkbox"] + label {
+    /* keep pointer so that you get the little hand showing when you are on a button */
+    cursor: pointer;
+    /* the following are the styles */
+    float: right;
+    border-radius: 50%;
+    padding: 9px 10px;
+    text-shadow: 0 -1px 0 rgba(0,0,0,0.7), 0 0 0 hsla(208.12, 44.44%, 85.88%, 0);
+    color: #fff;
+    font-weight: bold;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.2), 0 6px 10px -1px rgba(0,0,0,0.6);
+    background: -moz-linear-gradient(top, #37373d 0%, #222228 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#37373d), color-stop(100%,#222228)); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top, #37373d 0%,#222228 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top, #37373d 0%,#222228 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top, #37373d 0%,#222228 100%); /* IE10+ */
+    background: linear-gradient(to bottom, #37373d 0%,#222228 100%); /* W3C */
+}
+
+input[type="radio"]:checked + label,
+input[type="checkbox"]:checked + label{
+    /* style for the checked/selected state */
+    text-shadow: 0 0 10px hsla(208.12, 44.44%, 85.88%, 1);
+    color: #fff;
+    box-shadow: inset 0 2px 3px rgba(0,0,0,0.4), inset 0 0 4px 4px rgba(0,0,0,0.1);
+    background: -moz-linear-gradient(top, #313137 0%, #1e1e24 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#313137), color-stop(100%,#1e1e24)); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top, #313137 0%,#1e1e24 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top, #313137 0%,#1e1e24 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top, #313137 0%,#1e1e24 100%); /* IE10+ */
+    background: linear-gradient(to bottom, #313137 0%,#1e1e24 100%); /* W3C */
+}
+
+.group > label {
+    border-radius: 2px;
+}
+
+.center {
+    border-left: 1px solid #121212;
+    border-right: 1px solid #121212;
+}
+/*
+input[type="radio"], 
+input[type="checkbox"] {
+    opacity: 0;
+}
+
+input[type="radio"] + label, 
+input[type="checkbox"] + label {
+    cursor: pointer;
+    padding: 4px 10px;
+    border: 1px solid #ccc;
+    background: #efefef;
+    color: #aaa;
+    border-radius: 3px;
+    text-shadow: 1px 1px 0 rgba(0,0,0,0);
+}
+
+input[type="radio"]:checked + label,
+input[type="checkbox"]:checked + label{
+    background: #777;
+    border: 1px solid #444;
+    text-shadow: 1px 1px 0 rgba(0,0,0,0.4);
+    color: white;
+}*/
+</style>
+<div data-role="view" data-title="View" data-layout="main" data-model="app.contactsView" data-init="app.contactsView.onInit" data-show="app.contactsView.onShow" data-after-show="app.contactsView.afterShow" id="contactsViewScreen" class="screen">
+    <header data-role="header">
+        <div data-role="navbar" class="header-text">
+
+            <span data-bind="text: strings.contactsView.title"></span>
+
+            <a data-role="button" href="#appDrawer" data-rel="drawer" data-align="left" data-icon="drawer-button"></a>
+
+        </div>
+        <div id="menu-nav" data-role="tabstrip" data-bind="events: { select: changeView }">
+            <a data-target="users" data-title="Users" data-icon="contacts"><span data-bind="text: strings.contactsView.tab1title"></span></a>
+            <a data-target="chatgroup" data-title="ChatGroup" id="btnChatGroup" data-icon="chat-e">ChatGroup</a>
+            <a data-target="votes" data-title="Votes" data-icon="nominee-e"><span data-bind="text: strings.contactsView.tab3title"></span></a>
+            <a data-target="challenges" data-title="Challenges" data-icon="challenge-e"><span data-bind="text: strings.contactsView.tab4title"></span></a>
+        </div>
+    </header>
+
+    <!-- START_CUSTOM_CODE_contactsView -->
+    <!-- Add custom code here. For more information about custom code, see http://docs.telerik.com/platform/screenbuilder/troubleshooting/how-to-keep-custom-code-changes -->
+    <ul id="userList" data-role="listview" data-style="inset" data-template="itemTemplate" data-bind="visible:showUsers, source: dataSource"></ul>
+
+    <!-- this is the template used by the listview. template items are automatically wrapped in an <li> by Kendo UI Mobile -->
+    <script type="text/x-kendo-template" id="contactsTemplate">
+        <a data-bind="click: alert">#: data.name #</a>
+    </script>
+    
+    <script id="itemTemplate" type="text/x-kendo-template">
+        
+        <div class="wrapper">
+            <div class="action" data-role="touch" data-tap="app.events.tap">
+              <a data-bind="visible:showButtons, click: acceptChatRequest" data-role="button" class="btn-archive" id="#: app.user.uid #_badge_#: data.id #" data-badge=""><i class="fa fa-comments"></i> </a>
+              <a data-bind="visible:showButtons, click: acceptRequest" data-role="button" class="btn-archive"><i class="fa fa-user"></i> </a>
+            </div>
+            <div class="item" data-role="touch" data-drag="app.events.dragging" data-dragend="app.events.dragend">
+                <input data-bind="events: { change: alertVote}" id="Radio#:data.id#" name="Radios" type="radio" value="#:data.name#">
+                <label data-bind="invisible:showButtons" for="Radio#:data.id#"><i class="fa fa-share"></i></label>
+            <!--<input data-bind="invisible:showButtons, events: { change: alertVote}" class="buttonSwitch" type="checkbox" data-role="switch" data-checked="false" value="#:data.id#" id="chkbx#:data.id#"/>-->
+                <img class="km-thumbnail" src="#:img#"><h6 class="km-bold">#: data.name #</h6><p class="job-title">#: data.email #</p>
+            </div>
+        </div>
+    </script>
+    
+    <!--<div class="group">
+    <input id="Radio1" name="Radios" type="radio" value="First Option" checked="checked">
+    <label for="Radio1">A</label>
+    <input id="Radio2" name="Radios" type="radio" value="Other Option" >
+    <label class="center" for="Radio2">B</label>
+    <input id="Radio3" name="Radios" type="radio" value="Other Option" >
+    <label for="Radio3">C</label>
+    <input id="Radio4" name="Radios" disabled type="radio" value="Other Option" >
+    <label for="Radio4">D</label>
+    <input id="Radio5" name="Radios" type="radio" value="Other Option" >
+    <label for="Radio5">E</label>
+    </div><br/><br />
+    <div class="group">
+    <input id="checkbox1" name="checkboxs" type="checkbox" value="First Option" checked="checked">
+    <label for="checkbox1">A</label>
+    <input id="checkbox2" name="checkboxs" type="checkbox" value="Other Option" >
+    <label class="center" for="checkbox2">B</label>
+    <input id="checkbox3" name="checkboxs" type="checkbox" value="Other Option" >
+    <label for="checkbox3">C</label>
+    </div>-->
+
+    
+    <ul id="chatGroup" data-pull-to-refresh="true" data-append-on-refresh="true" data-role="listview" data-bind="visible:showChatGroup, source: dataSourceChatGroup" data-template="chatTemplate"></ul>
+    <script type="text/x-kendo-template" id="chatTemplate">
+        # if (id == app.user.uid) { #
+            <div class="chat-display-name"><span class="time">#:moment(date).fromNow()#</span></div><br>
+            <div class="bubble-to">
+                # if(message.indexOf('data:image') != -1){#
+                    <img class="chat-message-photo" src="#: message #" /> 
+                # } else { #
+                    #: message #
+                # } #
+            </div>
+        # } else { #
+            <div class="chat-display-name">#: name # <span class="time">#:moment(date).fromNow()#</span></div>
+            #   if (img !== '') { #
+            <img class="listview-photo" src="#: img #" />
+            #   } else { #
+            <div class="iconBox"><i class="fa fa-user"></i></div>
+            #   } #
+            <div class="bubble-from">
+                #if(message.indexOf('data:image') != -1){#
+                    <img class="chat-message-photo" src="#: message #" /> 
+                # } else { #
+                    #: message #
+                # } #
+            </div>
+        # } #
+    </script> 
+    <!-- END_CUSTOM_CODE_contactsView -->
+    <div data-bind="visible:showNominations" class="message-footer" data-role="footer">
+            <input id="hiddenName" hidden value=""/>
+            <span class="messageTextBoxContainer"><input class="TxtAreaVotes" id="messageTextBox" placeholder="Type a message..." type="text" /></span>
+            <span class="message-button-container"><button class="message-button2" data-role="button" data-bind="click: sendNominee" id="sendButton2"><i class="fa fa-send"></i></button></span>
+    </div>
+    <div data-bind="visible:showChatFooter" class="message-footer" data-role="footer">
+        <form id="msform2">
+            <input type="file" accept="image/*" id="chat-message-photo" style="display: none">
+            <span class="message-button-container"><button id="sendPicture" class="message-button messageImage" data-role="button"><i class="fa fa-camera"></i></button></span>
+            <span class="messageTextBoxContainer"><input class="message2" id="messageTextBox" placeholder="Type a message..." type="text" /></span>
+            <span class="message-button-container"><button class="message-button" data-role="button" data-bind="click: send" id="sendButton"><i class="fa fa-send"></i></button></span>
+        </form>
+    </div>
+</div>

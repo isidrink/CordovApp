@@ -1,0 +1,131 @@
+<style>
+    #user-chat-room .km-content, #claim-simulator .km-content {
+        /*background-color: #ff6e40;*/
+        color: white;
+    }
+    .profileImg {    
+        height: 45px;
+        width: 45px;
+        position: fixed;
+        top: 2px;
+        left: 30px;
+        border-radius: 50%;
+        border: 2px solid white;
+    }
+    #user-chat-room .km-view-title {
+        text-align: left;
+        padding-left: 40px;
+    }
+    /*overlay:down*/
+    /*******************************************************/
+    /*
+    https://jsfiddle.net/5dcto0td/
+    https://jsfiddle.net/s60dgfw2/
+    */
+/*******************************************/
+.chat {
+    width: 100%;
+}
+
+.bubble{
+    background-color: #F2F2F2;
+    border-radius: 5px;
+    box-shadow: 0 0 6px #B2B2B2;
+    display: inline-block;
+    padding: 0px 10px;
+    position: relative;
+    vertical-align: top;
+}
+
+.bubble::before {
+    background-color: #F2F2F2;
+    content: "\00a0";
+    display: block;
+    height: 8px;
+    position: absolute;
+    top: 11px;
+    transform:             rotate( 29deg ) skew( -35deg );
+        -moz-transform:    rotate( 29deg ) skew( -35deg );
+        -ms-transform:     rotate( 29deg ) skew( -35deg );
+        -o-transform:      rotate( 29deg ) skew( -35deg );
+        -webkit-transform: rotate( 29deg ) skew( -35deg );
+    width:  10px;
+}
+
+.me {
+    float: left;   
+    margin: 5px 45px 5px 5px;         
+}
+
+.me::before {
+    box-shadow: -2px 2px 2px 0 rgba( 178, 178, 178, .4 );
+    left: -3px;           
+}
+
+.you {
+    float: right;    
+    margin: 5px 5px 5px 45px;         
+}
+
+.you::before {
+    box-shadow: 2px -2px 2px 0 rgba( 178, 178, 178, .4 );
+    right: -3px;    
+}
+.time{font-size: 12px; color:#B2B2B2}
+#chatUserRoomList li{    padding: 0 10px 10px 10px;
+     border: none; 
+    /*border: 2px #4C5356 dashed;*/}
+</style>
+<div data-role="view" id="user-chat-room" data-reload="false" data-title="Chat with" data-model="app.contactsView" data-hide="app.contactsView.onHideChat" data-show="app.contactsView.onShowChat" data-init="app.contactsView.onInitChat" data-transition="overlay:right reverse" data-layout="main" >
+    <header data-role="header">
+        <div data-role="navbar" id="menu-navbar2" >
+            <img class="profileImg" data-align="left" src="styles/img/default.jpg" />
+            <span data-role="view-title" data-bind="html: title" data-icon="back-button"></span>
+            <a class="button-icon" data-role="backbutton" data-align="left"></a>
+        </div>
+    </header> 
+
+    <div class="chat">        
+        <ul id="chatUserRoomList" data-pull-to-refresh="true" data-append-on-refresh="true" data-role="listview" data-bind="source: dataSourceChat" data-template="chatTemplate2"></ul>
+    </div>
+    <script type="text/x-kendo-template" id="chatTemplate2">
+            <div class="bubble #:app.user.uid == id ? 'you':'me'#">
+                # if(message.indexOf('data:image') != -1){#
+                    <p><a rel="gallery" class="fancybox" href="#: message #"><img class="chat-message-photo" src="#: message #" alt=""/></a></p>
+                # } else { #
+                    <p>#: message #</p>
+                # } #
+                <time datetime="2009-11-13T20:00" class="time">#:moment(date).fromNow()#</time>
+            </div>
+    </script>
+    <script type="text/x-kendo-template" id="chatTemplate3">
+        # if (id == app.user.uid) { #
+            <div class="chat-display-name"><span class="time">#:moment(date).fromNow()#</span></div><br>
+            <div class="bubble-to">
+                # if(message.indexOf('data:image') != -1){#
+                    <img class="chat-message-photo" src="#: message #" /> 
+                # } else { #
+                    #: message #
+                # } #
+            </div>
+        # } else { #
+            <div class="chat-display-name">#: name # <span class="time">#:moment(date).fromNow()#</span></div>
+            <div class="bubble-from">
+                #if(message.indexOf('data:image') != -1){#
+                    <img class="chat-message-photo" src="#: message #" /> 
+                # } else { #
+                    #: message #
+                # } #
+            </div>
+        # } #
+    </script>
+
+    <div class="message-footer" data-role="footer">
+        <form id="msform3">
+            <input type="file" accept="image/*" id="chat-message-photo2" style="display: none">
+            <span class="message-button-container"><button id="sendPicture2" class="message-button messageImage2" data-role="button"><i class="fa fa-camera"></i></button></span>
+            <span class="messageTextBoxContainer"><input class="message3" id="messageTextBox2" placeholder="Type a message..." type="text" /></span>
+            <span class="message-button-container"><button class="message-button" data-role="button" data-bind="click: send" id="sendButton2"><i class="fa fa-send"></i></button></span>
+        </form>
+    </div>
+</div>

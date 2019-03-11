@@ -43,10 +43,13 @@
     var count = 0;
         
     function initFirebaseGroups(){
+        
+            app.utils.loading(false);
         console.log(startF);
         firebase.database().ref('users/' + app.user.uid + '/groups').on('child_added', added);
         firebase.database().ref('users/' + app.user.uid + '/groups').on('child_removed', removed);
 
+            //app.utils.loading(false);
         function added(idxSnap, prevId) {
             // when an item is added to the index, fetch the data
             console.log("roomId initFirebaseGroups -->"+idxSnap.key);
@@ -461,6 +464,7 @@
         },
         onInit: function () {
             console.log("onInit");
+            app.utils.loading(true);
             /*$('#language').trigger('click');
             
 
