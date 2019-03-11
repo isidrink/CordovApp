@@ -202,13 +202,13 @@ textarea:-ms-input-placeholder {
 }
 
 #friendsApp .km-button {
-    min-width: 7em;
+    /*min-width: 7em;
     padding: .75em 1.5em;
     border: 0;
     background-color: #9c9c9c;
     color: #fff;
     font-size: 1.25em;
-    text-transform: uppercase;
+    text-transform: uppercase;*/
 }
 
 #friendsApp .km-button.km-state-active {
@@ -403,13 +403,13 @@ textarea:-ms-input-placeholder {
 
 #friendsApp .km-header .km-view-title {
     display: block;
-    margin-left: 3.5em;
+    margin-left: 2.5em;
     margin-right: 3.5em;
     overflow: hidden;
     color: #fff;
     white-space: nowrap;
     text-overflow: ellipsis;
-    text-align: center;
+    text-align: left;
     text-transform: uppercase;
 }
 

@@ -60,6 +60,112 @@
     };
     firebase.initializeApp(config);
     </script>
+    <style>
+        .wrapper {
+        height: 30px;
+      }
+
+      .item {
+        position: absolute;
+        background-color: white;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        margin: 0;
+        width: 100%;
+        padding: 10px;
+      }
+
+      .action {
+        position: absolute;
+        /*left: 0;*/
+        right: 0;
+        top: 0;
+        bottom: 0;
+        margin: 0;
+        width: 40%;
+        height: 100%;
+        background-color: #F1F1F1;
+        text-align: center;
+      }
+
+      .centered {
+        margin: auto;
+        margin-top: 15px;
+        text-align: center;
+        color: gray;
+      }
+
+
+      .km-ios7 .km-list>li.collapsed {
+        border: none;
+        height: 0;
+        padding: 0;
+        -webkit-transition: all .3s;
+        transition: all .3s;
+      }
+
+      .km-button.btn-archive {
+        border: none;
+        color: gray;
+        background: #F1F1F1;
+        margin-top: 5px;
+      }
+
+      
+    .authentication-view .logo {
+        text-align: center;
+        margin-top: 50px;
+        margin-bottom: 20px;
+    }
+    .authentication-view input {
+        color: #ff6263;
+        padding-right: 0px;
+        text-align: center;
+    }
+    .separator {
+        color: #ff6263;
+        display: block;
+        text-align: center;
+    }
+    </style>
+    <style>
+    .km-chat-e:after,
+    .km-chat-e:before
+    {
+        content: "\e092";
+    }
+    .km-nova .km-state-active .km-chat-e:after{
+        content: "\e091";
+    }
+    .km-nominee-e:after,
+    .km-nominee-e:before
+    {
+        content: "\e223";
+    }
+    .km-nova .km-state-active .km-nominee-e:after{
+        content: "\e323";
+    }
+    .km-challenge-e:after,
+    .km-challenge-e:before
+    {
+        content: "\e214";
+    }
+    .km-nova .km-state-active .km-challenge-e:after{
+        content: "\e314";
+    }
+    .km-logout-e:after,
+    .km-logout-e:before
+    {
+        content: "\e0b9";
+    }
+    .km-save-button:after,
+    .km-save-button:before
+    {
+        content: "\e0bd";
+    }
+</style>
 </head>
 <body id="friendsApp">
     <div data-role="layout" data-id="main">

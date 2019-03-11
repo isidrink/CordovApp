@@ -51,8 +51,93 @@
         $('#navigation-container li a.active').removeClass('active');
         currentItem.addClass('active');
     };
+    
+    
+    app.events = {
+        dragging: function(e) {
+          var left = e.sender.element.position().left;
+          if (left <= 0) {
+            e.sender.element.css("left", left + e.touch.x.delta);
+          }
+        },
+        dragend: function(e) {
+          //console.log(e);
+          var el = e.sender.element;
+          // get the listview width 
+          var width = $("ul").width();
+          // set a threshold of 75% of the width
+          var threshold = (width * .25);          
+          // if the item is less than 75% of the way across, slide it out
+          if (Math.abs(el.position().left) > threshold) {
+            kendo.fx(el).slideIn("right").duration(500).reverse();
+          }
+          else {
+            el.animate({ left: 0 });
+          }
+        },
+        swipe: function(e) {
+          if (e.direction === "left") {
+            var del = e.sender.element;
+            kendo.fx(del).slideIn("right").duration(500).reverse();
+          }
+        },
+        tap: function(e) {
+          // make sure the initial touch wasn't on the archive button
+          var initial = e.touch.initialTouch;
+          var target = e.touch.currentTarget;
+          //console.table([{ initial: initial, target: target }]);
+          // if we are tapping outside the archive area, cancel the action
+          if (initial === target) 
+          {
+            // get the closest item and slide it back in
+            var item = e.sender.element.siblings();
+            item.css({ left: 0 });
+            kendo.fx(item).slideIn("left").duration(500).play();
+          }
+          // else we are archiving so remove it
+          else {
+            e.sender.element.closest("li").addClass("collapsed");
+          }
+        }
+    };
 
-     app.writeUserData = function (userId, name, email, imageUrl) {
+    app.toDataURL = function (url, callback) {
+    var xhr = new XMLHttpRequest();
+    xhr.onload = function() {
+        var reader = new FileReader();
+        reader.onloadend = function() {
+        callback(reader.result);
+        }
+        reader.readAsDataURL(xhr.response);
+    };
+    xhr.open('GET', url);
+    xhr.responseType = 'blob';
+    xhr.send();
+    }
+
+    app.getDataUri = function (url, callback) {
+
+        var image = new Image();
+        //image.crossOrigin = 'use-credentials';
+        //image.crossOrigin = "Anonymous";
+        image.onload = function () {
+            var canvas = document.createElement('canvas');
+            canvas.width = this.naturalWidth; // or 'width' if you want a special/scaled size
+            canvas.height = this.naturalHeight; // or 'height' if you want a special/scaled size
+
+            canvas.getContext('2d').drawImage(this, 0, 0);
+
+            // Get raw image data
+            //callback(canvas.toDataURL('image/png').replace(/^data:image\/(png|jpg);base64,/, ''));
+
+            // ... or get as Data URI
+            callback(canvas.toDataURL('image/png'));
+        };
+        image.crossOrigin = ''; // no credentials flag. Same as img.crossOrigin='anonymous'
+        image.src = url;
+    }
+    
+    app.writeUserData = function (userId, name, email, imageUrl) {
         firebase.database().ref('users/' + userId).set({
             username: name,
             email: email,
